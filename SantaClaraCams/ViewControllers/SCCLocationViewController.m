@@ -27,7 +27,7 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    /* I've been trying to figure out if a `_updateFrameTimer.valid` check is needed
+    /* research regarding if `_updateFrameTimer.valid` check is needed
      * NSTimer is an abstract class, the concrete class is __NSCFTimer
      * The implementation of -[__NSCFTimer invalidate] is {
      *     CFRunLoopTimerInvalidate(self);
@@ -55,8 +55,9 @@
 - (IBAction)_imageDoubleTapSkip:(UIGestureRecognizer *)recognizer {
     SCCFrameIndex const skipFrames = 5;
     if (recognizer.state == UIGestureRecognizerStateEnded) {
-        CGPoint hitPoint = [recognizer locationInView:self.imageView];
-        if (hitPoint.x > CGRectGetMidX(self.imageView.frame)) {
+        UIView *testView = self.imageView;
+        CGPoint hitPoint = [recognizer locationInView:testView];
+        if (hitPoint.x > CGRectGetMidX(testView.frame)) {
             self.currentFrame += skipFrames;
         } else {
             self.currentFrame -= skipFrames;
@@ -69,10 +70,20 @@
     
     self.title = model.localizedName;
     
+    NSUserActivity *userActivity = model.userActivity;
+    self.userActivity = userActivity;
+    [userActivity becomeCurrent];
+    
     [self _setupFrameUpdateTimerForModel:model];
     if (self.viewLoaded) {
         [self _setupMapCameraForModel:model];
     }
+}
+
+- (void)restoreUserActivityState:(NSUserActivity *)activity {
+    [super restoreUserActivityState:activity];
+    
+    self.model = [SCCCameraLocation cameraWithUserActivity:activity];
 }
 
 - (void)_setupMapCameraForModel:(SCCCameraLocation *)model {
@@ -85,27 +96,24 @@
 }
 
 - (void)_setupFrameUpdateTimerForModel:(SCCCameraLocation *)model {
-    [_updateFrameTimer invalidate];
-    
-    if (model) {
-        __weak __typeof(self) weakself = self;
-        [model currentFrameWithCallback:^(SCCFrameIndex index, NSError *err) {
-            if (err) {
-                NSLog(@"Failed to find the current frame: %@", err);
-            } else if (index) {
-                weakself.currentFrame = index;
-                if (weakself) {
-                    __typeof(self) strongself = weakself;
-                    const NSTimeInterval secondsPerFrame = 1/model.framesPerSecond;
-                    NSTimer *frameTimer = [NSTimer timerWithTimeInterval:secondsPerFrame repeats:YES block:^(NSTimer *timer) {
-                        weakself.currentFrame++;
-                    }];
-                    [NSRunLoop.mainRunLoop addTimer:frameTimer forMode:NSDefaultRunLoopMode];
-                    strongself->_updateFrameTimer = frameTimer;
-                }
-            }
-        }];
-    }
+    __weak __typeof(self) weakself = self;
+    [model currentFrameWithCallback:^(SCCFrameIndex index, NSError *err) {
+        if (err) {
+            NSLog(@"Failed to find the current frame: %@", err);
+            return;
+        }
+        weakself.currentFrame = index;
+        if (weakself) {
+            __typeof(self) strongself = weakself;
+            const NSTimeInterval secondsPerFrame = 1/model.framesPerSecond;
+            NSTimer *frameTimer = [NSTimer timerWithTimeInterval:secondsPerFrame repeats:YES block:^(NSTimer *timer) {
+                weakself.currentFrame++;
+            }];
+            [NSRunLoop.mainRunLoop addTimer:frameTimer forMode:NSDefaultRunLoopMode];
+            [strongself->_updateFrameTimer invalidate];
+            strongself->_updateFrameTimer = frameTimer;
+        }
+    }];
 }
 
 - (void)setDebugInfo:(NSString *)debugInfo {
@@ -123,11 +131,11 @@
 }
 
 - (void)setCurrentFrame:(SCCFrameIndex)currentFrame {
-    // typically it's [0, upper), but this is (0, upper]
-    currentFrame %= self.model.maxFrame;
-    // `left ?:= value` would be a nice operation (assign `left` to `value` if `!left`)
+    SCCFrameIndex const maxFrame = self.model.maxFrame;
+    // the convention is usually [0, upper) however, this is (0, upper]
+    currentFrame %= maxFrame;
     if (currentFrame == 0) {
-        currentFrame = self.model.maxFrame;
+        currentFrame = maxFrame;
     }
     _currentFrame = currentFrame;
     
@@ -154,13 +162,14 @@
                 
                 NSDate *nowTime = [NSDate date];
                 debugText = [NSString stringWithFormat:@""
-                             "Key: %@\n"
+                             "CID: %@\n"
                              "Now: %@\n"
                              "Frame: %@\n"
                              "Difference: %.4f\n"
                              "Index: %d",
-                             weakself.model.key, [displayFormatter stringFromDate:nowTime],
-                             [displayFormatter stringFromDate:frameDate], [nowTime timeIntervalSinceDate:frameDate], currentFrame];
+                             weakself.model.cameraID, [displayFormatter stringFromDate:nowTime],
+                             [displayFormatter stringFromDate:frameDate],
+                             [nowTime timeIntervalSinceDate:frameDate], currentFrame];
             }
         }
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -179,7 +188,8 @@
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     // in landscape, the camera goes full screen
-    // todo: only hide the bar after some time, and make it possible to still go back, possibly by making the bar reappear on click
+    // todo: only hide the bar after some time, and make it possible to still go back,
+    //   possibly by making the bar reappear on click
     [self.navigationController setNavigationBarHidden:(size.width > size.height) animated:YES];
 }
 
@@ -193,10 +203,6 @@
 // in landscape, the nav bar can be hidden, so the status bar should go away too
 - (BOOL)prefersStatusBarHidden {
     return YES;
-}
-// this is here, just in case
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
 }
 
 @end

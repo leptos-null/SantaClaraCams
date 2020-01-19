@@ -11,5 +11,6 @@
 
 @interface SCCViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
 
+- (void)navigateForModel:(SCCCameraLocation *)model animated:(BOOL)animated;
 
 @end
