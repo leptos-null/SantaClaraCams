@@ -4,12 +4,11 @@ SantaClaraCams is an iOS app that provides an easy way to view the traffic camer
 
 ### Screenshots
 
-![First view](Screenshots/table_view.png)
+<img width="46.5%" src="Screenshots/iOS_table.png">
+<br>
+<img width="94%" src="Screenshots/iOS_slide.png">
+<br>
+<img align="left" width="46.5%" src="Screenshots/iOS_mark.png"><img align="right" width="46.5%" src="Screenshots/iOS_zoom.png">
 
-![San Tomas Aquino Creek Trail camera with map zoomed out](Screenshots/stact_out.png)
-
-![San Tomas Aquino Creek Trail camera with map zoomed in](Screenshots/stact_in.png)
-
-![Map zoomed out to show many cameras](Screenshots/map_spread.png)
-
-![Intersection of Great America and Bunker hill](Screenshots/gabh_in.png)
+<img width="94%" src="Screenshots/macOS_mark.png">
+<img width="94%" src="Screenshots/macOS_zoom.png">
