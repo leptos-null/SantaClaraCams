@@ -15,7 +15,7 @@
     
     SCCLocationViewController *locationController = self.detailViewController;
     locationController.modelChangeDelegate = self.listViewController;
-    locationController.model = SCCCameraLocation.knownLocations.firstObject;
+    [locationController setModel:SCCCameraLocation.knownLocations.firstObject animated:NO];
 }
 
 /*

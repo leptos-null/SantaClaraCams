@@ -19,6 +19,8 @@
 @property (weak, nonatomic) id<SCCLocationModelChangeDelegate> modelChangeDelegate;
 
 @property (strong, nonatomic) SCCCameraLocation *model;
+- (void)setModel:(SCCCameraLocation *)model animated:(BOOL)animated;
+
 @property (nonatomic) SCCFrameIndex currentFrame;
 
 @property (nonatomic) BOOL shouldShowDebugInfo;

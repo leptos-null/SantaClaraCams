@@ -15,10 +15,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    for (SCCCameraLocation *location in SCCCameraLocation.knownLocations) {
-        [self.mapView addAnnotation:location];
-    }
-    
+    [self.mapView addAnnotations:SCCCameraLocation.knownLocations];
+    /*
+     * if (@available(iOS 13.0, *)) {
+     *     self.mapView.cameraZoomRange = [[MKMapCameraZoomRange alloc] initWithMaxCenterCoordinateDistance:8000];
+     *     self.mapView.cameraBoundary = [[MKMapCameraBoundary alloc] initWithCoordinateRegion:(MKCoordinateRegion){
+     *         .center.latitude = 37.400,
+     *         .center.longitude = -121.974,
+     *         .span.latitudeDelta = 0.05,
+     *         .span.longitudeDelta = 0.04
+     *     }];
+     * }
+     */
     [self _setupMapCameraForModel:self.model animated:NO];
 }
 
@@ -63,6 +71,10 @@
 }
 
 - (void)setModel:(SCCCameraLocation *)model {
+    [self setModel:model animated:YES];
+}
+
+- (void)setModel:(SCCCameraLocation *)model animated:(BOOL)animated {
     _model = model;
     
     self.title = model.localizedName;
@@ -73,7 +85,7 @@
     
     [self _setupFrameUpdateTimerForModel:model];
     if (self.viewLoaded) {
-        [self _setupMapCameraForModel:model animated:YES];
+        [self _setupMapCameraForModel:model animated:animated];
     }
     [self.modelChangeDelegate modelController:self didChange:model];
 }
@@ -89,6 +101,7 @@
         /* these pitch and distance numbers are kind of estimated by what looked good */
         MKMapCamera *camera = [MKMapCamera cameraLookingAtCenterCoordinate:model.location.coordinate fromDistance:32 pitch:60 heading:model.heading];
         [self.mapView setCamera:camera animated:animated];
+        [self.mapView selectAnnotation:model animated:animated];
     }
 }
 
@@ -163,10 +176,12 @@
                              "Now: %@\n"
                              "Frame: %@\n"
                              "Difference: %.4f\n"
-                             "Index: %d",
+                             "Index: %d\n"
+                             "Heading: %.1f",
                              weakself.model.cameraID, [displayFormatter stringFromDate:nowTime],
                              [displayFormatter stringFromDate:frameDate],
-                             [nowTime timeIntervalSinceDate:frameDate], currentFrame];
+                             [nowTime timeIntervalSinceDate:frameDate],
+                             currentFrame, weakself.mapView.camera.heading];
             }
         }
         dispatch_async(dispatch_get_main_queue(), ^{
