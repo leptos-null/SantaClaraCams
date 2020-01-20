@@ -32,37 +32,37 @@ static inline double constrictValueBound(double v, double b) {
     dispatch_once(&onceToken, ^{
         ret = @[
             [self cameraWithName:@"San Tomas Aquino Creek Trail @ Mission College" identifier:@"MissionCreekTrail"
-                        location:[[CLLocation alloc] initWithLatitude:37.389137 longitude:-121.968255] heading:289],
+                        location:[[CLLocation alloc] initWithLatitude:37.389137 longitude:-121.968255] heading:266],
             [self cameraWithName:@"Bowers Ave @ SB101 Ramps" identifier:@"Bowers101"
-                        location:[[CLLocation alloc] initWithLatitude:37.384560 longitude:-121.977493] heading:41],
+                        location:[[CLLocation alloc] initWithLatitude:37.384560 longitude:-121.977493] heading:48],
             [self cameraWithName:@"Great America @ 101 Off-Ramp NB" identifier:@"GA101"
-                        location:[[CLLocation alloc] initWithLatitude:37.386760 longitude:-121.976634] heading:36],
+                        location:[[CLLocation alloc] initWithLatitude:37.386760 longitude:-121.976634] heading:64],
             [self cameraWithName:@"Great America @ Bunker Hill" identifier:@"GAParkwayBunkerHill"
-                        location:[[CLLocation alloc] initWithLatitude:37.405447 longitude:-121.977944] heading:19],
+                        location:[[CLLocation alloc] initWithLatitude:37.405447 longitude:-121.977944] heading:26],
             [self cameraWithName:@"Great America @ Mission College" identifier:@"GAMissionCollege"
-                        location:[[CLLocation alloc] initWithLatitude:37.392569 longitude:-121.976966] heading:117],
+                        location:[[CLLocation alloc] initWithLatitude:37.392569 longitude:-121.976966] heading:102],
             [self cameraWithName:@"Great America @ Patrick Henry" identifier:@"GAPatrickHenry"
-                        location:[[CLLocation alloc] initWithLatitude:37.395812 longitude:-121.978110] heading:24],
+                        location:[[CLLocation alloc] initWithLatitude:37.395812 longitude:-121.978110] heading:36],
             [self cameraWithName:@"Great America @ Old Glory" identifier:@"GAOldGlory"
-                        location:[[CLLocation alloc] initWithLatitude:37.399989 longitude:-121.978148] heading:146],
+                        location:[[CLLocation alloc] initWithLatitude:37.399989 longitude:-121.978148] heading:118],
             [self cameraWithName:@"Great America @ Tasman" identifier:@"GATasman"
-                        location:[[CLLocation alloc] initWithLatitude:37.403059 longitude:-121.978006] heading:65],
+                        location:[[CLLocation alloc] initWithLatitude:37.403059 longitude:-121.978006] heading:36],
             [self cameraWithName:@"Great America @ Old Mtn View Alviso" identifier:@"GAOldMtnViewAlviso"
-                        location:[[CLLocation alloc] initWithLatitude:37.410354 longitude:-121.977903] heading:162],
+                        location:[[CLLocation alloc] initWithLatitude:37.410354 longitude:-121.977903] heading:32],
             [self cameraWithName:@"Great America @ Great America Pkwy" identifier:@"GAGAParkway"
-                        location:[[CLLocation alloc] initWithLatitude:37.414011 longitude:-121.977409] heading:337],
+                        location:[[CLLocation alloc] initWithLatitude:37.414011 longitude:-121.977409] heading:334],
             [self cameraWithName:@"Mission College @ Agnew" identifier:@"MissionCollegeAgnew"
-                        location:[[CLLocation alloc] initWithLatitude:37.388898 longitude:-121.969322] heading:305],
+                        location:[[CLLocation alloc] initWithLatitude:37.388898 longitude:-121.969322] heading:314],
             [self cameraWithName:@"Mission College @ Mission College Circle" identifier:@"GAMissionCollegeCircle"
-                        location:[[CLLocation alloc] initWithLatitude:37.391697 longitude:-121.978794] heading:308],
+                        location:[[CLLocation alloc] initWithLatitude:37.391697 longitude:-121.978794] heading:46],
             [self cameraWithName:@"Tasman @ Convention Center" identifier:@"TasmanConventionCenter"
-                        location:[[CLLocation alloc] initWithLatitude:37.403637 longitude:-121.975551] heading:120],
+                        location:[[CLLocation alloc] initWithLatitude:37.403637 longitude:-121.975551] heading:146],
             [self cameraWithName:@"Tasman @ Old Ironsides" identifier:@"TasmanOldIronsides"
-                        location:[[CLLocation alloc] initWithLatitude:37.403143 longitude:-121.979995] heading:309],
+                        location:[[CLLocation alloc] initWithLatitude:37.403143 longitude:-121.979995] heading:328],
             [self cameraWithName:@"Tasman @ Calle De Sol" identifier:@"TasmanCalleDeSol"
-                        location:[[CLLocation alloc] initWithLatitude:37.407359 longitude:-121.963758] heading:282],
+                        location:[[CLLocation alloc] initWithLatitude:37.407359 longitude:-121.963758] heading:284],
             [self cameraWithName:@"Tasman @ Lick Mill" identifier:@"TasmanLickMill"
-                        location:[[CLLocation alloc] initWithLatitude:37.408365 longitude:-121.961359] heading:251],
+                        location:[[CLLocation alloc] initWithLatitude:37.408365 longitude:-121.961359] heading:263],
         ];
     });
     return ret;
