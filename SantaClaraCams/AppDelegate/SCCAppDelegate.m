@@ -22,23 +22,17 @@
     if ([userActivity.activityType isEqualToString:SCCCameraLocationActivityType]) {
         SCCCameraLocation *model = [SCCCameraLocation cameraWithUserActivity:userActivity];
         
-        UINavigationController *navController = (__kindof UIViewController *)self.window.rootViewController;
-        NSAssert([navController isKindOfClass:[UINavigationController class]], @"rootViewController: UINavigationController");
+        UISplitViewController *splitController = (__kindof UIViewController *)self.window.rootViewController;
+        NSAssert([splitController isKindOfClass:[UISplitViewController class]], @"rootViewController: UISplitViewController");
         
-        SCCViewController *rootController = nil;
-        for (__kindof UIViewController *controller in navController.viewControllers) {
-            if ([controller isKindOfClass:[SCCLocationViewController class]]) {
-                SCCLocationViewController *locationController = controller;
-                locationController.model = model;
-                return YES;
-            } else if ([controller isKindOfClass:[SCCViewController class]]) {
-                rootController = controller;
-            }
-        }
-        if (rootController) {
-            [rootController navigateForModel:model animated:NO];
-            return YES;
-        }
+        UINavigationController *navController = splitController.viewControllers.firstObject;
+        NSAssert([navController isKindOfClass:[UINavigationController class]], @"navController: UINavigationController");
+        
+        SCCViewController *tableController = navController.viewControllers.firstObject;
+        NSAssert([tableController isKindOfClass:[SCCViewController class]], @"tableController: SCCViewController");
+
+        [tableController navigateForModel:model animated:NO];
+        return YES;
     }
     return NO;
 }

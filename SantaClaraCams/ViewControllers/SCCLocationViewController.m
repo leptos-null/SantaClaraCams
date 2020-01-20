@@ -15,14 +15,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    CGSize currentViewSize = self.view.frame.size;
-    self.navigationController.navigationBarHidden = (currentViewSize.width > currentViewSize.height);
-    
+    if (!self.model) {
+        self.model = SCCCameraLocation.knownLocations.firstObject;
+    }
     for (SCCCameraLocation *location in SCCCameraLocation.knownLocations) {
         [self.mapView addAnnotation:location];
     }
     
-    [self _setupMapCameraForModel:self.model];
+    [self _setupMapCameraForModel:self.model animated:NO];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -76,7 +76,7 @@
     
     [self _setupFrameUpdateTimerForModel:model];
     if (self.viewLoaded) {
-        [self _setupMapCameraForModel:model];
+        [self _setupMapCameraForModel:model animated:YES];
     }
 }
 
@@ -86,12 +86,11 @@
     self.model = [SCCCameraLocation cameraWithUserActivity:activity];
 }
 
-- (void)_setupMapCameraForModel:(SCCCameraLocation *)model {
+- (void)_setupMapCameraForModel:(SCCCameraLocation *)model animated:(BOOL)animated {
     if (model) {
-        BOOL shouldAnimate = (self.navigationController.visibleViewController == self);
         /* these pitch and distance numbers are kind of estimated by what looked good */
         MKMapCamera *camera = [MKMapCamera cameraLookingAtCenterCoordinate:model.location.coordinate fromDistance:32 pitch:60 heading:model.heading];
-        [self.mapView setCamera:camera animated:shouldAnimate];
+        [self.mapView setCamera:camera animated:animated];
     }
 }
 
@@ -185,24 +184,8 @@
     }
 }
 
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
-    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-    // in landscape, the camera goes full screen
-    // todo: only hide the bar after some time, and make it possible to still go back,
-    //   possibly by making the bar reappear on click
-    [self.navigationController setNavigationBarHidden:(size.width > size.height) animated:YES];
-}
-
 - (void)dealloc {
     [_updateFrameTimer invalidate];
-}
-// either the map is visible, or the camera is full screen, either way, we don't want the home indicator
-- (BOOL)prefersHomeIndicatorAutoHidden {
-    return YES;
-}
-// in landscape, the nav bar can be hidden, so the status bar should go away too
-- (BOOL)prefersStatusBarHidden {
-    return YES;
 }
 
 @end

@@ -18,10 +18,34 @@
 }
 
 - (void)navigateForModel:(SCCCameraLocation *)model animated:(BOOL)animated {
-    SCCLocationViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:@"LocationController"];
-    [controller loadViewIfNeeded];
+    SCCLocationViewController *controller = nil;
+    UISplitViewController *splitController = self.splitViewController;
+    /*
+     * isCollapsed:
+     *   split
+     *   |-- navigation
+     *       |-- table
+     *       |-- location (optional)
+     *
+     * notCollapsed:
+     *   split
+     *   |-- navigation
+     *   |   |-- table
+     *   |-- location
+     *
+     */
+    if (splitController.collapsed) {
+        UINavigationController *navController = self.navigationController;
+        if (navController.topViewController == self) {
+            controller = [self.storyboard instantiateViewControllerWithIdentifier:@"LocationController"];
+            [splitController showDetailViewController:controller sender:self];
+        } else {
+            controller = navController.viewControllers[1];
+        }
+    } else {
+        controller = splitController.viewControllers[1];
+    }
     controller.model = model;
-    [self.navigationController pushViewController:controller animated:animated];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
