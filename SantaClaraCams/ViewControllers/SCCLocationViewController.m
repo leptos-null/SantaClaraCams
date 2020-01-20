@@ -15,9 +15,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if (!self.model) {
-        self.model = SCCCameraLocation.knownLocations.firstObject;
-    }
     for (SCCCameraLocation *location in SCCCameraLocation.knownLocations) {
         [self.mapView addAnnotation:location];
     }
@@ -78,6 +75,7 @@
     if (self.viewLoaded) {
         [self _setupMapCameraForModel:model animated:YES];
     }
+    [self.modelChangeDelegate modelController:self didChange:model];
 }
 
 - (void)restoreUserActivityState:(NSUserActivity *)activity {

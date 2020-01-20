@@ -1,5 +1,5 @@
 //
-//  SCCViewController.h
+//  SCCListViewController.h
 //  SantaClaraCams
 //
 //  Created by Leptos on 3/23/19.
@@ -7,9 +7,10 @@
 //
 
 @import UIKit;
-@import SantaClaraCityCams;
 
-@interface SCCViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
+#import "SCCLocationViewController.h"
+
+@interface SCCListViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate, SCCLocationModelChangeDelegate>
 
 - (void)navigateForModel:(SCCCameraLocation *)model animated:(BOOL)animated;
 

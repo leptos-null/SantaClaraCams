@@ -215,6 +215,14 @@ static inline double constrictValueBound(double v, double b) {
     }] resume];
 }
 
+- (BOOL)isEqual:(SCCCameraLocation *)object {
+    if ([object isKindOfClass:[self class]]) {
+        // for now this is sufficient
+        return [self.cameraID isEqualToString:object.cameraID];
+    }
+    return NO;
+}
+
 // MARK: - MKAnnotation
 
 - (CLLocationCoordinate2D)coordinate {

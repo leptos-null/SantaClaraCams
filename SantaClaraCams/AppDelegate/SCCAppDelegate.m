@@ -7,31 +7,19 @@
 //
 
 #import "SCCAppDelegate.h"
-#import "../ViewControllers/SCCViewController.h"
-#import "../ViewControllers/SCCLocationViewController.h"
+#import "../ViewControllers/SCCSplitViewController.h"
 
 @implementation SCCAppDelegate
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-    return YES;
-}
 
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity
  restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> *))restorationHandler {
     if ([userActivity.activityType isEqualToString:SCCCameraLocationActivityType]) {
         SCCCameraLocation *model = [SCCCameraLocation cameraWithUserActivity:userActivity];
         
-        UISplitViewController *splitController = (__kindof UIViewController *)self.window.rootViewController;
-        NSAssert([splitController isKindOfClass:[UISplitViewController class]], @"rootViewController: UISplitViewController");
+        SCCSplitViewController *splitController = (__kindof UIViewController *)self.window.rootViewController;
+        NSAssert([splitController isKindOfClass:[UISplitViewController class]], @"rootViewController: SCCSplitViewController");
         
-        UINavigationController *navController = splitController.viewControllers.firstObject;
-        NSAssert([navController isKindOfClass:[UINavigationController class]], @"navController: UINavigationController");
-        
-        SCCViewController *tableController = navController.viewControllers.firstObject;
-        NSAssert([tableController isKindOfClass:[SCCViewController class]], @"tableController: SCCViewController");
-
-        [tableController navigateForModel:model animated:NO];
+        [splitController.listViewController navigateForModel:model animated:NO];
         return YES;
     }
     return NO;

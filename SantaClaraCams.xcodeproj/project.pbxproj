@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FA0D3E3422469FE8007724A0 /* SCCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0D3E3322469FE8007724A0 /* SCCAppDelegate.m */; };
-		FA0D3E3722469FE8007724A0 /* SCCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0D3E3622469FE8007724A0 /* SCCViewController.m */; };
+		FA0D3E3722469FE8007724A0 /* SCCListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0D3E3622469FE8007724A0 /* SCCListViewController.m */; };
 		FA0D3E3A22469FE8007724A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA0D3E3822469FE8007724A0 /* Main.storyboard */; };
 		FA0D3E3C22469FE9007724A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA0D3E3B22469FE9007724A0 /* Assets.xcassets */; };
 		FA0D3E3F22469FE9007724A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA0D3E3D22469FE9007724A0 /* LaunchScreen.storyboard */; };
@@ -20,6 +20,7 @@
 		FA0D3E662246C2AE007724A0 /* SCCCameraLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0D3E642246C2AE007724A0 /* SCCCameraLocation.m */; };
 		FA0D3E6A2246D0DC007724A0 /* SCCLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0D3E692246D0DC007724A0 /* SCCLocationViewController.m */; };
 		FA38E4BE23D3AA6300F41B5A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FA38E4BD23D3AA6300F41B5A /* README.md */; };
+		FA6F792823D56A1900A857E8 /* SCCSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA6F792723D56A1900A857E8 /* SCCSplitViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,8 +51,8 @@
 		FA0D3E2F22469FE8007724A0 /* SantaClaraCams.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SantaClaraCams.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA0D3E3222469FE8007724A0 /* SCCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCCAppDelegate.h; sourceTree = "<group>"; };
 		FA0D3E3322469FE8007724A0 /* SCCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCCAppDelegate.m; sourceTree = "<group>"; };
-		FA0D3E3522469FE8007724A0 /* SCCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCCViewController.h; sourceTree = "<group>"; };
-		FA0D3E3622469FE8007724A0 /* SCCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCCViewController.m; sourceTree = "<group>"; };
+		FA0D3E3522469FE8007724A0 /* SCCListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCCListViewController.h; sourceTree = "<group>"; };
+		FA0D3E3622469FE8007724A0 /* SCCListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCCListViewController.m; sourceTree = "<group>"; };
 		FA0D3E3922469FE8007724A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FA0D3E3B22469FE9007724A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA0D3E3E22469FE9007724A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -66,6 +67,8 @@
 		FA0D3E692246D0DC007724A0 /* SCCLocationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCCLocationViewController.m; sourceTree = "<group>"; };
 		FA18BF9723D26346002D87AF /* SantaClaraCams.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SantaClaraCams.entitlements; sourceTree = "<group>"; };
 		FA38E4BD23D3AA6300F41B5A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		FA6F792623D56A1900A857E8 /* SCCSplitViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCCSplitViewController.h; sourceTree = "<group>"; };
+		FA6F792723D56A1900A857E8 /* SCCSplitViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCCSplitViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,8 +143,10 @@
 		FA0D3E4A2246A09D007724A0 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				FA0D3E3522469FE8007724A0 /* SCCViewController.h */,
-				FA0D3E3622469FE8007724A0 /* SCCViewController.m */,
+				FA6F792623D56A1900A857E8 /* SCCSplitViewController.h */,
+				FA6F792723D56A1900A857E8 /* SCCSplitViewController.m */,
+				FA0D3E3522469FE8007724A0 /* SCCListViewController.h */,
+				FA0D3E3622469FE8007724A0 /* SCCListViewController.m */,
 				FA0D3E682246D0DC007724A0 /* SCCLocationViewController.h */,
 				FA0D3E692246D0DC007724A0 /* SCCLocationViewController.m */,
 			);
@@ -291,7 +296,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA0D3E3722469FE8007724A0 /* SCCViewController.m in Sources */,
+				FA0D3E3722469FE8007724A0 /* SCCListViewController.m in Sources */,
+				FA6F792823D56A1900A857E8 /* SCCSplitViewController.m in Sources */,
 				FA0D3E4222469FE9007724A0 /* main.m in Sources */,
 				FA0D3E3422469FE8007724A0 /* SCCAppDelegate.m in Sources */,
 				FA0D3E6A2246D0DC007724A0 /* SCCLocationViewController.m in Sources */,

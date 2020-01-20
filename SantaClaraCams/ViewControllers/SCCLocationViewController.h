@@ -10,7 +10,13 @@
 @import MapKit;
 @import SantaClaraCityCams;
 
+@protocol SCCLocationModelChangeDelegate <NSObject>
+- (void)modelController:(id)controller didChange:(SCCCameraLocation *)model;
+@end
+
 @interface SCCLocationViewController : UIViewController <MKMapViewDelegate, UIUserActivityRestoring>
+
+@property (weak, nonatomic) id<SCCLocationModelChangeDelegate> modelChangeDelegate;
 
 @property (strong, nonatomic) SCCCameraLocation *model;
 @property (nonatomic) SCCFrameIndex currentFrame;

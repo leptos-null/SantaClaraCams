@@ -11,7 +11,7 @@
         <!--Santa Clara City-->
         <scene sceneID="DkU-HK-lJ5">
             <objects>
-                <tableViewController id="Jrc-5f-sBu" customClass="SCCViewController" sceneMemberID="viewController">
+                <tableViewController id="Jrc-5f-sBu" customClass="SCCListViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="GKR-1X-Ndb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -136,7 +136,7 @@
         <!--Split View Controller-->
         <scene sceneID="9wv-u2-Qaw">
             <objects>
-                <splitViewController id="9oR-b5-kDo" sceneMemberID="viewController">
+                <splitViewController id="9oR-b5-kDo" customClass="SCCSplitViewController" sceneMemberID="viewController">
                     <connections>
                         <segue destination="c2B-Mm-Aqz" kind="relationship" relationship="detailViewController" id="dzH-Un-FPg"/>
                         <segue destination="4S9-Jc-W6O" kind="relationship" relationship="masterViewController" id="jBk-lA-U6N"/>
