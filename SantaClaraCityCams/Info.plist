@@ -15,8 +15,8 @@
 	<key>CFBundlePackageType</key>
 	<string>FMWK</string>
 	<key>CFBundleShortVersionString</key>
-	<string>$(SCC_PROJECT_SHARED_VERSION)</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>$(SCC_PROJECT_SHARED_BUILD)</string>
+	<string>$(VERSION_BUILD)</string>
 </dict>
 </plist>
